@@ -78,7 +78,7 @@ public class Main {
 
     public static void reader() throws Exception {
 
-        Scanner sc = new Scanner(new BufferedReader(new FileReader("C:\\Users\\james\\txtgame\\startmap.txt")));
+        Scanner sc = new Scanner(new BufferedReader(new FileReader("C:\\Users\\james\\ideaprojects\\txtgame\\startmap.txt")));
 
         for (int i = 0; i < mazeMap.length; i++) {
             String line = sc.nextLine(); //Reads rows from maze.txt as long as "y" is less than the number of rows
