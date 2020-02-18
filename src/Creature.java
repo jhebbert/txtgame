@@ -1,13 +1,20 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Creature {
 
-    private int hp;
+    private int hp = 10;
     private ArrayList<Item> inventory;
-    private String name;
-    private int armorClass;
+    private String name = "monster";
+    private int armorClass = 10;
     private ArrayList<Item> equipedItems;
+    private int strength = 10;
+    private int dexterity = 10;
+    private Weapon equipedWeapon = new Claws();
 
+
+
+    // Print complete inventory to console
     public void viewInventory() {
         for(int i = 0; i < inventory.size(); i++) {
             System.out.println(inventory.get(i).getName());
@@ -52,5 +59,21 @@ public abstract class Creature {
 
     public ArrayList<Item> getEquipedItems() {
         return equipedItems;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public void setEquipedWeapon(Weapon equipedWeapon) {
+        this.equipedWeapon = equipedWeapon;
+    }
+
+    public Weapon getEquipedWeapon() {
+        return equipedWeapon;
     }
 }

@@ -3,44 +3,26 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+public class Map {
+
+    public static int rows = 10;
+    public static int columns = 10;
+    public static char[][] mazeMap = new char[rows][columns];
+    public static int y = 0;
+    public static int x = 0;
+
+    private static ArrayList<Creature> presentCreatures = new ArrayList<>();
 
 
+    public static void mapReader() throws Exception {
 
-
-public class Main {
-
-
-
-
-    public static void main(String[] args) throws Exception {
-
-
-
-
-        prntIntro();
-        // Create character
-        CharacterCreation.crtChar(Player.getPlayer());
-        Map.mapReader();
-        Map.findStart();
-        Map.tellNewLocation();
-        Map.moveLoop();
-    }
-
-    private static void prntIntro() {
-        System.out.println("Epic intro here");
-    }
-
-
-
-
-    /*public static void mapReader() throws Exception {
-
+        // Read map from text file
         Scanner sc = new Scanner(new BufferedReader(new FileReader("C:\\Users\\james\\ideaprojects\\txtgame\\startmap.txt")));
 
         for (int i = 0; i < mazeMap.length; i++) {
-            String line = sc.nextLine(); //Reads rows from maze.txt as long as "y" is less than the number of rows
+            String line = sc.nextLine(); //Reads rows from maze.txt as long as "i" is less than the number of rows
             for (int j = 0; j < line.length(); j++) {
-                mazeMap[i][j] = line.charAt(j); //For each line "y" in maze.txt read the character at index "x"
+                mazeMap[i][j] = line.charAt(j); //For each line "i" in maze.txt read the character at index "j"
             }
         }
     }
@@ -68,13 +50,13 @@ public class Main {
         }
     }
 
-
+    //
     public static void moveLoop() throws Exception {
         mapReader();
-        placeP();
-        printMap();
+        //placeP();
         findPossibleMove();
-        playerMove();
+        PlayerCommand.getCommandInput();
+        //printMap();
         moveLoop();
     }
 
@@ -95,17 +77,18 @@ public class Main {
         }
     }
 
-    public static String getCommandInput() {
-
-        System.out.println("Where do you want to move?");
+    /*public static String getUserInput() {
+        System.out.println("What do you want to do?");
         System.out.println("Use WASD keys to move.");
+
         Scanner scanInput = new Scanner(System.in);
         String userInput = scanInput.next();
-        return userInput;
-    }
 
-    public static void playerMove() {
-        String userInput = getCommandInput();
+        return userInput;
+    }*/
+
+    public static void playerMove(String userInput) throws Exception {
+
 
         if (userInput.equals("n") || userInput.equals("north") || userInput.equals("North")) {
             if (mazeMap[y - 1][x] != 'W') {
@@ -138,7 +121,7 @@ public class Main {
         }  else {
             System.out.println("Sorry, that is not a valid command.");
             System.out.println("Please enter w, a, s, or d, then press enter to move through the maze");
-            playerMove();
+            PlayerCommand.getCommandInput();
         }
     }
 
@@ -149,7 +132,9 @@ public class Main {
             System.out.println("You see majestic mountains.");
         }
         else if (mazeMap[y][x] == 'E') {
-            System.out.println("You see an enemy! What do you want to do?");
+            Creature enemy = new Monster();
+            presentCreatures.add(enemy);
+            System.out.println("You see a " + enemy.getName() + ". What do you want to do?");
         }
         else if (mazeMap[y][x] == 'W') {
             System.out.println("You are standing in a wall!");
@@ -161,6 +146,10 @@ public class Main {
     }
     public static void placeP() {
         mazeMap[y][x] = 'P';
-    }*/
     }
 
+    public static ArrayList<Creature> getPresentCreatures() {
+        return presentCreatures;
+    }
+
+}
