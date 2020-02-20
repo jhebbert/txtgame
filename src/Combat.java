@@ -57,6 +57,7 @@ public class Combat {
             Map.moveLoop();
         } else if (Map.getPresentCreatures().get(0).getHp() <= 0) {
             System.out.println(Map.getPresentCreatures().get(0) + " is unconscious");
+            Map.markDead();
             Map.moveLoop();
         } else {
             if (!hasCountered) {
@@ -75,6 +76,8 @@ public class Combat {
         if (fightOn.toLowerCase().equals("yes") || fightOn.toLowerCase().equals("y")) {
             hasCountered = false;
             attack(attacker, target);
+        } else if (fightOn.toLowerCase().equals("no")) {
+            attemptFlee();
         }
     }
 
@@ -87,4 +90,26 @@ public class Combat {
 
         Combat.calculateHit(toHit, monster, player);
     }
-}
+
+    // 75% chance of escaping combat. If not, another round of combat is played
+    public static void attemptFlee() {
+
+        System.out.println("You attempt to flee...");
+        Random rand = new Random();
+
+        try {
+            if (rand.nextInt(4) > 0) {
+                System.out.println("You got away!");
+                Map.moveLoop();
+            } else {
+
+                System.out.println("The monster caught you!");
+                attack(Player.getPlayer(), Map.getPresentCreatures().get(0));
+            }
+
+            }catch (Exception e) {
+
+            }
+        }
+    }
+

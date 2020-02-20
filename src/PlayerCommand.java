@@ -59,6 +59,10 @@ public class PlayerCommand {
                 }
 
                 Combat.attack(Player.getPlayer(), target);
+                break;
+            case "loot":
+                Player.getPlayer().lootBody();
+                break;
         }
 
     }

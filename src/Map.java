@@ -132,7 +132,7 @@ public class Map {
             System.out.println("You see majestic mountains.");
         }
         else if (mazeMap[y][x] == 'E') {
-            Creature enemy = new Monster();
+            Monster enemy = new Monster();
             presentCreatures.add(enemy);
             System.out.println("You see a " + enemy.getName() + ". What do you want to do?");
         }
@@ -152,4 +152,7 @@ public class Map {
         return presentCreatures;
     }
 
+    public static void markDead() {
+        mazeMap[y][x] = 'D';
+    }
 }

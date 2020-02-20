@@ -4,7 +4,7 @@ import java.util.Random;
 public abstract class Creature {
 
     private int hp = 10;
-    private ArrayList<Item> inventory;
+    private ArrayList<Item> inventory = new ArrayList<>();
     private String name = "monster";
     private int armorClass = 10;
     private ArrayList<Item> equipedItems;
@@ -12,12 +12,14 @@ public abstract class Creature {
     private int dexterity = 10;
     private Weapon equipedWeapon = new Claws();
 
-
+    public void Creature() {
+        this.addToInventory(equipedWeapon);
+    }
 
     // Print complete inventory to console
     public void viewInventory() {
         for(int i = 0; i < inventory.size(); i++) {
-            System.out.println(inventory.get(i).getName());
+            System.out.println(i + 1 + ") " +inventory.get(i).getName());
         }
     }
 
@@ -34,11 +36,13 @@ public abstract class Creature {
     }
 
     public  ArrayList<Item> getInventory() {
+
         return  inventory;
     }
 
     public void setInventory(ArrayList inventory) {
         this.inventory = inventory;
+        inventory.add(equipedWeapon);
     }
 
     public String getName() {
@@ -75,5 +79,9 @@ public abstract class Creature {
 
     public Weapon getEquipedWeapon() {
         return equipedWeapon;
+    }
+
+    public void addToInventory(Item item) {
+        inventory.add(item);
     }
 }

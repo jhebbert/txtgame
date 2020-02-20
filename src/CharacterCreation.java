@@ -43,7 +43,7 @@ public class CharacterCreation {
         else if(player.getProfession().toLowerCase().equals("knight")) {
             System.out.println("Guard: Oh...um...Welcome to our humble town my lord " + player.getName() +
                     ". Let me know if I can get you anything.");
-            player.setHp(8);
+            player.setHp(20);
             ArrayList<Item> inventory = new ArrayList<>();
             inventory.add(new Armor("plate armor", 30, 5, 2, 10,
                     "none"));
